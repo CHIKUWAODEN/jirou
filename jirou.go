@@ -12,11 +12,9 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// Represents command line option
-type option struct {
-	help bool
-	port int
-}
+import (
+	"./jirou"
+)
 
 func Help() {
 	fmt.Println("JIROU API")
@@ -81,15 +79,34 @@ func Delete(writer http.ResponseWriter, request *http.Request, _ httprouter.Para
 		writer, "API Under construction", http.StatusNotImplemented)
 }
 
+// Represents command line option
+type option struct {
+	help       bool
+	port       int
+	bulkInsert string
+	dbFile     string
+}
+
 func main() {
 	// Parse comand line option
 	var option = option{}
 	flag.BoolVar(&option.help, "help", false, "print help message")
 	flag.IntVar(&option.port, "port", 8080, "set port number")
+	flag.StringVar(&option.bulkInsert, "bulk-insert", "", "insert records to database from file")
+	flag.StringVar(&option.dbFile, "db-file", "", "path to database file")
 	flag.Parse()
 
+	// Print help
 	if option.help {
 		Help()
+		os.Exit(0)
+	}
+
+	// Bulk insert mode
+	bulkInsert := flag.Lookup("bulk-insert")
+	if bulkInsert != nil {
+		fmt.Printf("Bulk insert from file : %s\n", bulkInsert.Value.String())
+		jirou.BulkInsert(bulkInsert.Value.String())
 		os.Exit(0)
 	}
 
