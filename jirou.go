@@ -81,10 +81,9 @@ func Delete(writer http.ResponseWriter, request *http.Request, _ httprouter.Para
 
 // Represents command line option
 type option struct {
-	help       bool
-	port       int
-	bulkInsert string
-	dbFile     string
+	help  bool
+	port  int
+	setup bool
 }
 
 func main() {
@@ -92,8 +91,7 @@ func main() {
 	var option = option{}
 	flag.BoolVar(&option.help, "help", false, "print help message")
 	flag.IntVar(&option.port, "port", 8080, "set port number")
-	flag.StringVar(&option.bulkInsert, "bulk-insert", "", "insert records to database from file")
-	flag.StringVar(&option.dbFile, "db-file", "", "path to database file")
+	flag.BoolVar(&option.setup, "setup", false, "insert records to database from file")
 	flag.Parse()
 
 	// Print help
@@ -102,11 +100,10 @@ func main() {
 		os.Exit(0)
 	}
 
-	// Bulk insert mode
-	bulkInsert := flag.Lookup("bulk-insert")
-	if bulkInsert != nil {
-		fmt.Printf("Bulk insert from file : %s\n", bulkInsert.Value.String())
-		jirou.BulkInsert(bulkInsert.Value.String())
+	// Setup
+	if option.setup {
+		fmt.Println("setup Jirou API server...")
+		jirou.Setup()
 		os.Exit(0)
 	}
 
