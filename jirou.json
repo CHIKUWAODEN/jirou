@@ -1,10 +1,147 @@
-{
-  "link" : {
-    "root"   : { "method" : "GET",  "uri" : "/" },
-    "index"  : { "method" : "GET",  "uri" : "/v1" }
+{[
+  {
+    "shop_name" : "ラーメン二郎 三田本店",
+    "business_hours" : [{
+      "open" : "08:30",
+      "last" : "15:30"
+    },{
+      "open" : "17:00",
+      "last" : "20:00"
+    }],
+    "regular_holiday" : [ "sun", "national" ],
+    "address" : {
+      "prefecture"  : "東京都",
+      "city"        : "港区",
+      "address1"    : "三田",
+      "address2"    : "2-16-4",
+      "postal_code" : "108-0073"
+    },
+    "menues" : [
+      { "name" : "ラーメン"             , "price" : 600  },
+      { "name" : "ぶたラーメン"         , "price" : 700  },
+      { "name" : "ぶたダブルラーメン"   , "price" : 800  },
+      { "name" : "大ラーメン"           , "price" : 650  },
+      { "name" : "ぶた入り大ラーメン"   , "price" : 750  },
+      { "name" : "ぶたダブル大ラーメン" , "price" : 1000 }
+    ],
+    "created"   : "Fri Jun 12 23:03:50 JST 2015",
+    "modified"  : "Fri Jun 12 23:03:50 JST 2015"
   },
-  "content" : [
-    {"address":{"address1":"仙川町","address2":"1-10-17","city":"調布市","postal_code":"182-0002","prefecture":"東京都"},"business_hours":[{"last":"23:30","open":"17:30"}],"created":"Fri Jun 12 23:03:50 JST 2015","menues":[{"name":"ラーメン","price":700},{"name":"豚入りラーメン","price":800},{"name":"豚入りラーメン","price":900},{"name":"大盛ラーメン","price":800},{"name":"大盛豚入りラーメン","price":900},{"name":"大ダブルラーメン（鍋二郎）","price":1000},{"name":"麺少なめ","price":700},{"name":"生麺","price":100}],"modified":"Fri Jun 12 23:03:50 JST 2015","regular_holiday":["sun"],"shop_n,{"address":{"address1":"仙川町","address2":"1-10-17","city":"調布市","postal_code":"182-0002","prefecture":"東京都"},"business_hours":[{"last":"23:30","open":"17:30"}],"created":"Fri Jun 12 23:03:50 JST 2015","menues":[{"name":"ラーメン","price":700},{"name":"豚入りラーメン","price":800},{"name":"豚入りラーメン","price":900},{"name":"大盛ラーメン","price":800},{"name":"大盛豚入りラーメン","price":900},{"name":"大ダブルラーメン（鍋二郎）","price":1000},{"name":"麺少なめ","price":700},{"name":"生麺","price":100}],"modified":"Fri Jun 12 23:03:50 JST 2015","regular_holiday":[,{"address":{"address1":"仙川町","address2":"1-10-17","city":"調布市","postal_code":"182-0002","prefecture":"東京都"},"business_hours":[{"last":"23:30","open":"17:30"}],"created":"Fri Jun 12 23:03:50 JST 2015","menues":[{"name":"ラーメン","price":700},{"name":"豚入りラーメン","price":800},{"name":"豚入りラーメン","price":900},{"name":"大盛ラーメン","price":800},{"name":"大盛豚入りラーメン","price":900},{"name":"大ダブルラーメン（鍋二郎）","price":1000},{"name":"麺少なめ","price":700},{"name":"生麺","price":100}],"modified":"Fri Jun 12 23:03:50 JST 2015","regular_holiday":["sun"],"shop_name":"ラーメン二郎 仙川店"},{"address":{"address1":"北品川","address2":"1-18-5","city":"品川区","postal_code":"140-0001","prefecture":"東京都"},"business_hours":[{"last":"14:30","open":"10:00"},{"last":"22:30","open":"17:00"},{"last":"14:00","open":"11:00"}],"created":"Fri Jun 12 23:03:50 JST 2015","menues":[{"name":"普通盛 小","price":700},{"name":"普通盛焼豚 小ブタ","price":800},{"name":"普通盛焼豚大 小ダブル","price":900},{"name":"大盛 大","price":800},{"name":"大盛焼豚 大ブタ","price":900},{"name":"大盛焼豚 大ダブル","price":1000},{"name":"煮玉子","price":100}],"modified":"Fri Jun 12 23:03:50 JST 2015","regular_holiday":["sun","national"],"shop_name":"ラーメン二郎 品川店"}gular_holiday":[],"shop_name":"ラーメン二郎 歌舞伎町店"},{"address":{"address1":"北品川","address2":"1-18-5","city":"品川区","postal_code":"140-0001","prefecture":"東京都"},"business_hours":[{"last":"14:30","open":"10:00"},{"last":"22:30","open":"17:00"},{"last":"14:00","open":"11:00"}],"created":"Fri Jun 12 23:03:50 JST 2015","menues":[{"name":"普通盛 小","price":700},{"name":"普通盛焼豚 小ブタ","price":800},{"name":"普通盛焼豚大 小ダブル","price":900},{"name":"大盛 大","price":800},{"name":"大盛焼豚 大ブタ","price":900},{"name":"大盛焼豚 大ダブル","price":1000},{"name":"煮玉子","price":100}],"modified":"Fri Jun 12 23:03:50 JST 2015","regular_holiday":["sun","national"],"shop_name":"ラーメン二郎 品川店"}
-  ]
-}
-
+  {
+    "shop_name" : "ラーメン二郎 目黒店",
+    "business_hours" : [{
+      "open" : "12:00",
+      "last" : "16:00"
+    },{
+      "open" : "18:00",
+      "last" : "24:00"
+    }],
+    "regular_holiday" : [ "wed" ],
+    "address" : {
+      "prefecture"  : "東京都",
+      "city"        : "目黒区",
+      "address1"    : "目黒",
+      "address2"    : "3-7-2",
+      "postal_code" : "153-0063"
+    },
+    "menues" : [
+      { "name" : "小ラーメン"          , "price" : 500  },
+      { "name" : "小ラーメン豚入り"    , "price" : 600  },
+      { "name" : "小ラーメンW豚入り"   , "price" : 700  },
+      { "name" : "大ラーメン"          , "price" : 600  },
+      { "name" : "大ラーメン豚入り"    , "price" : 700  },
+      { "name" : "大ラーメンW豚入り"   , "price" : 800  }
+    ],
+    "created"   : "Fri Jun 12 23:03:50 JST 2015",
+    "modified"  : "Fri Jun 12 23:03:50 JST 2015"
+  },
+  {
+    "shop_name" : "ラーメン二郎 仙川店",
+    "business_hours" : [{
+      "open" : "17:30",
+      "last" : "23:30"
+    }],
+    "regular_holiday" : [ "sun" ],
+    "address" : {
+      "prefecture"  : "東京都",
+      "city"        : "調布市",
+      "address1"    : "仙川町",
+      "address2"    : "1-10-17",
+      "postal_code" : "182-0002"
+    },
+    "menues" : [
+      { "name" : "ラーメン"                   , "price" :  700 },
+      { "name" : "豚入りラーメン"             , "price" :  800 },
+      { "name" : "豚入りラーメン"             , "price" :  900 },
+      { "name" : "大盛ラーメン"               , "price" :  800 },
+      { "name" : "大盛豚入りラーメン"         , "price" :  900 },
+      { "name" : "大ダブルラーメン（鍋二郎）" , "price" : 1000 },
+      { "name" : "麺少なめ"                   , "price" :  700 },
+      { "name" : "生麺"                       , "price" :  100 }
+    ],
+    "created"   : "Fri Jun 12 23:03:50 JST 2015",
+    "modified"  : "Fri Jun 12 23:03:50 JST 2015"
+  },
+  {
+    "shop_name" : "ラーメン二郎 歌舞伎町店",
+    "business_hours" : [{
+      "open" : "11:30",
+      "last" : "28:00"
+    }],
+    "regular_holiday" : [],
+    "address" : {
+      "prefecture"  : "東京都",
+      "city"        : "新宿区",
+      "address1"    : "歌舞伎町",
+      "address2"    : "1-19-3",
+      "postal_code" : "160-0021"
+    },
+    "menues" : [
+      { "name" : "普通盛"                 , "price" :  700 },
+      { "name" : "チャーシュー"           , "price" :  800 },
+      { "name" : "チャーシューダブル"     , "price" :  900 },
+      { "name" : "大盛"                   , "price" :  800 },
+      { "name" : "大盛チャーシュー"       , "price" :  900 },
+      { "name" : "大盛チャーシューダブル" , "price" : 1000 },
+      { "name" : "つけ麺普通"             , "price" :  800 },
+      { "name" : "つけ麺大盛"             , "price" :  900 },
+      { "name" : "煮玉子"                 , "price" :  100 },
+      { "name" : "メンマ"                 , "price" :  100 },
+      { "name" : "生ビール"               , "price" :  500 }
+    ],
+    "created"   : "Fri Jun 12 23:03:50 JST 2015",
+    "modified"  : "Fri Jun 12 23:03:50 JST 2015"
+  },
+  {
+    "shop_name" : "ラーメン二郎 品川店",
+    "business_hours" : [{
+      "open" : "10:00",
+      "last" : "14:30"
+    },{
+      "open" : "17:00",
+      "last" : "22:30"
+    },{
+      "open" : "11:00",
+      "last" : "14:00"
+    }],
+    "regular_holiday" : [ "sun", "national" ],
+    "address" : {
+      "prefecture"  : "東京都",
+      "city"        : "品川区",
+      "address1"    : "北品川",
+      "address2"    : "1-18-5",
+      "postal_code" : "140-0001"
+    },
+    "menues" : [
+      { "name" : "普通盛 小"             , "price" :  700 },
+      { "name" : "普通盛焼豚 小ブタ"     , "price" :  800 },
+      { "name" : "普通盛焼豚大 小ダブル" , "price" :  900 },
+      { "name" : "大盛 大"               , "price" :  800 },
+      { "name" : "大盛焼豚 大ブタ"       , "price" :  900 },
+      { "name" : "大盛焼豚 大ダブル"     , "price" : 1000 },
+      { "name" : "煮玉子"                , "price" :  100 }
+    ],
+    "created"   : "Fri Jun 12 23:03:50 JST 2015",
+    "modified"  : "Fri Jun 12 23:03:50 JST 2015"
+  }
+]}
