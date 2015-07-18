@@ -85,11 +85,11 @@ func (self *Server) Search(writer http.ResponseWriter, request *http.Request, _ 
 	writer.Write(response)
 }
 
-func (self *Server) Create(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
-	writer.Header().Set("Content-Type", "application/json")
-	http.Error(
-		writer, "API Under construction", http.StatusNotImplemented)
-}
+// func (self *Server) Create(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
+// 	writer.Header().Set("Content-Type", "application/json")
+// 	http.Error(
+// 		writer, "API Under construction", http.StatusNotImplemented)
+// }
 
 func (self *Server) Read(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
 	writer.Header().Set("Content-Type", "application/json")
@@ -97,17 +97,17 @@ func (self *Server) Read(writer http.ResponseWriter, request *http.Request, _ ht
 		writer, "API Under construction", http.StatusNotImplemented)
 }
 
-func (self *Server) Update(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
-	writer.Header().Set("Content-Type", "application/json")
-	http.Error(
-		writer, "API Under construction", http.StatusNotImplemented)
-}
+// func (self *Server) Update(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
+// 	writer.Header().Set("Content-Type", "application/json")
+// 	http.Error(
+// 		writer, "API Under construction", http.StatusNotImplemented)
+// }
 
-func (self *Server) Delete(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
-	writer.Header().Set("Content-Type", "application/json")
-	http.Error(
-		writer, "API Under construction", http.StatusNotImplemented)
-}
+// func (self *Server) Delete(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
+// 	writer.Header().Set("Content-Type", "application/json")
+// 	http.Error(
+// 		writer, "API Under construction", http.StatusNotImplemented)
+// }
 
 func (self *Server) Run(serverOption *Option) {
 	// Build Routing
@@ -115,10 +115,10 @@ func (self *Server) Run(serverOption *Option) {
 	router.GET("/", self.Root)
 	router.GET("/v1", self.V1Root)
 	router.GET("/v1/jirou", self.Search)
-	router.POST("/v1/jirou", self.Create)
 	router.GET("/v1/jirou/:id", self.Read)
-	router.PUT("/v1/jirou/:id", self.Update)
-	router.DELETE("/v1/jirou/:id", self.Delete)
+	// router.POST("/v1/jirou", self.Create)
+	// router.PUT("/v1/jirou/:id", self.Update)
+	// router.DELETE("/v1/jirou/:id", self.Delete)
 
 	// Open db
 	dbOption := opt.Options{

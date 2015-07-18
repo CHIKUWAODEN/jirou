@@ -26,12 +26,12 @@ curl -s \
 
 
 # Create
-echo "POST /v1/jirou"
-curl -s \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"param1":"foo", "param2":"bar"}' \
-  "localhost:8080/v1/jirou" | jq "."
+# echo "POST /v1/jirou"
+# curl -s \
+#   -X POST \
+#   -H "Content-Type: application/json" \
+#   -d '{"param1":"foo", "param2":"bar"}' \
+#   "localhost:8080/v1/jirou" | jq "."
 
 
 # Read
@@ -42,17 +42,17 @@ curl -s \
 
 
 # Update
-echo "PUT /v1/jirou/0"
-curl -s \
-  -X PUT \
-  -H "Content-Type: application/json" \
-  -d '{ "param1": "foo", "param2": "bar" }' \
-  "localhost:8080/v1/jirou/0" | jq "."
+# echo "PUT /v1/jirou/0"
+# curl -s \
+#   -X PUT \
+#   -H "Content-Type: application/json" \
+#   -d '{ "param1": "foo", "param2": "bar" }' \
+#   "localhost:8080/v1/jirou/0" | jq "."
 
 
 # Delete
-echo "DELETE /v1/jirou/0"
-curl -s \
-  -X DELETE \
-  "localhost:8080/v1/jirou/0" | jq "."
+# echo "DELETE /v1/jirou/0"
+# curl -s \
+#   -X DELETE \
+#   "localhost:8080/v1/jirou/0" | jq "."
 
