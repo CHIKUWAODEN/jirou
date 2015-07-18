@@ -14,18 +14,21 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"time"
 )
 
 import (
 	"github.com/julienschmidt/httprouter"
+	"github.com/pborman/uuid"
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/opt"
 )
 
 // Server class
 type Server struct {
-	Router *httprouter.Router
-	Db     *leveldb.DB
+	Router   *httprouter.Router
+	Db       *leveldb.DB
+	DbReport *leveldb.DB
 }
 
 // Generate new Server instance
@@ -33,6 +36,7 @@ func NewServer() *Server {
 	var s = new(Server)
 	s.Router = httprouter.New()
 	s.Db = nil
+	s.DbReport = nil
 	return s
 }
 
@@ -141,9 +145,37 @@ func (self *Server) Read(writer http.ResponseWriter, request *http.Request, para
 
 // API function : GET "/v1/jirou/:id/report"
 func (self *Server) SearchReport(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
+
+	values := make([]string, 0, 5)
+	iter := self.DbReport.NewIterator(nil, nil)
+	for iter.Next() {
+		values = append(values, string(iter.Value()))
+	}
+	fmt.Printf("%v\n", values)
+	iter.Release()
+	err := iter.Error()
+	if nil != err {
+		// Error
+		http.Error(writer, "DB iteration error", http.StatusInternalServerError)
+		return
+	}
+
+	content := strings.Join(values, ",")
+	response := []byte(fmt.Sprintf(`
+		{
+			"link" : {
+				"root"   : { "method" : "GET",  "uri" : "/" },
+				"index"  : { "method" : "GET",  "uri" : "/v1" }
+			},
+			"content" : [
+				%v
+			]
+		}`,
+		content,
+	))
+
 	writer.Header().Set("Content-Type", "application/json")
-	http.Error(
-		writer, "API Under construction", http.StatusNotImplemented)
+	writer.Write(response)
 }
 
 /*
@@ -190,19 +222,45 @@ type Report struct {
 	Rating   Rating `json:"rating"`
 }
 
+// データベース保存用の Report
+type ReportDb struct {
+	Report
+	Date   string `json:"date"`
+	Uuid   string `json:"uuid"`
+	ShopID string `json:"shop_id"`
+}
+
 // 以上、レポっす
 func (self *Server) PostReport(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	// Parse POST data
-	var report Report
+	var report ReportDb
 	decorder := json.NewDecoder(request.Body)
 	decodeErr := decorder.Decode(&report)
 	if decodeErr != nil {
 		// Error
-		http.Error(writer, "API Under construction", http.StatusNotImplemented)
+		http.Error(writer, "Decode Error", http.StatusInternalServerError)
 		return
 	}
 
-	marshaled, _ := json.Marshal(report)
+	// Report の情報を付け足す
+	report.Date = time.Now().Format(time.RFC1123Z)
+	report.Uuid = uuid.New()
+	report.ShopID = params.ByName("id")
+
+	// marshal
+	marshaled, marshalErr := json.Marshal(report)
+	if marshalErr != nil {
+		http.Error(writer, "Marshal Error", http.StatusInternalServerError)
+		return
+	}
+
+	// データベースに書き込む
+	dbPutErr := self.DbReport.Put([]byte(report.Uuid), marshaled, nil)
+	if dbPutErr != nil {
+		http.Error(writer, "DB Error", http.StatusInternalServerError)
+		return
+	}
+
 	response := []byte(fmt.Sprintf(`
 		{
 			"link" : {
@@ -236,7 +294,9 @@ func (self *Server) Run(serverOption *Option) {
 	dbOption := opt.Options{
 		ErrorIfMissing: false,
 	}
+	// TODO Not DRY
 	db, err := leveldb.OpenFile("./jirou.db", &dbOption)
+	dbReport, errDbReport := leveldb.OpenFile("./report.db", &dbOption)
 	for {
 		if err != nil {
 			fmt.Println(err)
@@ -244,6 +304,14 @@ func (self *Server) Run(serverOption *Option) {
 		} else {
 			defer db.Close()
 			self.Db = db
+		}
+
+		if errDbReport != nil {
+			fmt.Println(errDbReport)
+			break
+		} else {
+			defer dbReport.Close()
+			self.DbReport = dbReport
 		}
 
 		// Start serving
