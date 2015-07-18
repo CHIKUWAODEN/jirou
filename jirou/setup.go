@@ -20,6 +20,7 @@ func Setup() error {
 	// 簡単のためにこのようにしている
 	var jsonBlob = []byte(`[
 	  {
+			"id" : 0,
 			"shop_name" : "ラーメン二郎 三田本店",
 			"business_hours" : [{
 				"open" : "08:30",
@@ -48,6 +49,7 @@ func Setup() error {
 			"modified"  : "Fri Jun 12 23:03:50 JST 2015"
 		},
 		{
+			"id" : 1,
 			"shop_name" : "ラーメン二郎 目黒店",
 			"business_hours" : [{
 				"open" : "12:00",
@@ -76,6 +78,7 @@ func Setup() error {
 			"modified"  : "Fri Jun 12 23:03:50 JST 2015"
 		},
 		{
+			"id" : 2,
 			"shop_name" : "ラーメン二郎 仙川店",
 			"business_hours" : [{
 				"open" : "17:30",
@@ -103,6 +106,7 @@ func Setup() error {
 			"modified"  : "Fri Jun 12 23:03:50 JST 2015"
 		},
 	  {
+			"id" : 3,
 			"shop_name" : "ラーメン二郎 歌舞伎町店",
 			"business_hours" : [{
 				"open" : "11:30",
@@ -133,6 +137,7 @@ func Setup() error {
 			"modified"  : "Fri Jun 12 23:03:50 JST 2015"
 		},
 	  {
+			"id" : 5,
 			"shop_name" : "ラーメン二郎 品川店",
 			"business_hours" : [{
 				"open" : "10:00",

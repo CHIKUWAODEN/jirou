@@ -35,10 +35,13 @@ curl -s \
 
 
 # Read
-echo "GET /v1/jirou/0"
-curl -s \
-  -X GET \
-  "localhost:8080/v1/jirou/0" | jq "."
+for id in 0 1 2 3 4
+do
+  echo "GET /v1/jirou/${id}"
+  curl -s \
+    -X GET \
+    "localhost:8080/v1/jirou/${id}" | jq "."
+done
 
 
 # Update

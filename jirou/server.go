@@ -56,6 +56,7 @@ func (self *Server) V1Root(writer http.ResponseWriter, request *http.Request, _ 
 }
 
 func (self *Server) Search(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
+
 	values := make([]string, 0, 5)
 	iter := self.Db.NewIterator(nil, nil)
 	for iter.Next() {
@@ -91,10 +92,24 @@ func (self *Server) Search(writer http.ResponseWriter, request *http.Request, _ 
 // 		writer, "API Under construction", http.StatusNotImplemented)
 // }
 
-func (self *Server) Read(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
+func (self *Server) Read(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+
+	key := []byte(params.ByName("id"))
+	content, _ := self.Db.Get(key, nil)
+
+	response := []byte(fmt.Sprintf(`
+		{
+			"link" : {
+				"root"   : { "method" : "GET",  "uri" : "/" },
+				"index"  : { "method" : "GET",  "uri" : "/v1" }
+			},
+			"content" : %v
+		}`,
+		string(content),
+	))
+
 	writer.Header().Set("Content-Type", "application/json")
-	http.Error(
-		writer, "API Under construction", http.StatusNotImplemented)
+	writer.Write(response)
 }
 
 // func (self *Server) Update(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
