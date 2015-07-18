@@ -190,13 +190,13 @@ func Setup() error {
 	}
 
 	// 格納できているかどうかテスト
-	/*
-		for i := 0; i < num; i++ {
-			key := []byte(fmt.Sprintf("%d", i))
-			d, _ := db.Get(key, nil)
-			fmt.Println("###", string(d), "\n")
-		}
-		//*/
+	//*
+	for i := 0; i < num; i++ {
+		key := []byte(fmt.Sprintf("%d", i))
+		d, _ := db.Get(key, nil)
+		fmt.Println("###", string(d), "\n")
+	}
+	//*/
 
 	/*
 		_ = db.Put([]byte("key1"), []byte("value1"), nil)

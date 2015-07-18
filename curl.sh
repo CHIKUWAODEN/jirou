@@ -1,61 +1,58 @@
 #!/bin/sh
 
 
-# API Version1 Root
+# API Root
 echo "GET /"
-curl -i -L \
+curl -s \
   -X GET \
   -H "Content-Type: application/json" \
-  "localhost:8080/"
-echo "exit code : $? \n"
+  "localhost:8080/" | jq "."
 
 
 # API Version1 Root
 echo "GET /v1"
-curl -i -L \
+curl -s \
   -X GET \
   -H "Content-Type: application/json" \
-  "localhost:8080/v1"
-echo "exit code : $? \n"
+  "localhost:8080/v1" | jq "."
+
 
 # Index
 echo "GET /v1/jirou"
-curl -i -L \
+curl -s \
   -X GET \
   -H "Content-Type: application/json" \
-  "localhost:8080/v1/jirou"
-echo "exit code : $? \n"
+  "localhost:8080/v1/jirou" | jq "."
+
 
 # Create
 echo "POST /v1/jirou"
-curl -i -L \
+curl -s \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"param1":"foo", "param2":"bar"}' \
-  "localhost:8080/v1/jirou"
-echo "exit code : $? \n"
+  "localhost:8080/v1/jirou" | jq "."
 
 
 # Read
 echo "GET /v1/jirou/0"
-curl -i -L \
+curl -s \
   -X GET \
-  "localhost:8080/v1/jirou/0"
-echo "exit code : $? \n"
+  "localhost:8080/v1/jirou/0" | jq "."
 
 
 # Update
 echo "PUT /v1/jirou/0"
-curl -i -L \
+curl -s \
   -X PUT \
   -H "Content-Type: application/json" \
-  -d '{"param1":"foo", "param2":"bar"}' \
-  "localhost:8080/v1/jirou/0"
-echo "exit code : $? \n"
+  -d '{ "param1": "foo", "param2": "bar" }' \
+  "localhost:8080/v1/jirou/0" | jq "."
+
 
 # Delete
 echo "DELETE /v1/jirou/0"
-curl -i -L \
+curl -s \
   -X DELETE \
-  "localhost:8080/v1/jirou/0"
-echo "exit code : $? \n"
+  "localhost:8080/v1/jirou/0" | jq "."
+
