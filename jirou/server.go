@@ -18,13 +18,11 @@ type Server struct {
 	Db     *leveldb.DB
 }
 
-func NewServer() Server {
-	router := httprouter.New()
-	server := Server{
-		Router: router,
-		Db:     nil,
-	}
-	return server
+func NewServer() *Server {
+	var s = new(Server)
+	s.Router = httprouter.New()
+	s.Db = nil
+	return s
 }
 
 func (self *Server) Root(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
