@@ -40,36 +40,6 @@ func NewServer() *Server {
 	return s
 }
 
-// API function : "/"
-func (self *Server) Root(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
-	// [todo] - 文字列を []byte にキャストするとメモリコピーが走っちゃうらしい
-	response := []byte(`
-	{
-		"link" : {
-			"root"  : { "method" : "GET", "uri" : "/"   },
-			"index" : { "method" : "GET", "uri" : "/v1" }
-		}
-	}
-	`)
-	writer.Header().Set("Content-Type", "application/json")
-	writer.Write(response)
-}
-
-// API function : "/v1"
-func (self *Server) V1Root(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
-	// [todo] - 文字列を []byte にキャストするとメモリコピーが走っちゃうらしい
-	response := []byte(`
-	{
-		"link" : {
-			"root"   : { "method" : "GET",  "uri" : "/" },
-			"index"  : { "method" : "GET",  "uri" : "/v1" }
-		}
-	}
-	`)
-	writer.Header().Set("Content-Type", "application/json")
-	writer.Write(response)
-}
-
 // API function : "/v1/jirou"
 // Get index of all shops.
 func (self *Server) Search(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
@@ -88,10 +58,6 @@ func (self *Server) Search(writer http.ResponseWriter, request *http.Request, _ 
 	content := strings.Join(values, ",")
 	response := []byte(fmt.Sprintf(`
 		{
-			"link" : {
-				"root"   : { "method" : "GET",  "uri" : "/" },
-				"index"  : { "method" : "GET",  "uri" : "/v1" }
-			},
 			"content" : [
 				%v
 			]
@@ -103,12 +69,6 @@ func (self *Server) Search(writer http.ResponseWriter, request *http.Request, _ 
 	writer.Write(response)
 }
 
-// func (self *Server) Create(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
-// 	writer.Header().Set("Content-Type", "application/json")
-// 	http.Error(
-// 		writer, "API Under construction", http.StatusNotImplemented)
-// }
-
 // API function : "/v1/jirou"
 // Get a shop data by ID
 func (self *Server) Read(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
@@ -118,10 +78,6 @@ func (self *Server) Read(writer http.ResponseWriter, request *http.Request, para
 
 	response := []byte(fmt.Sprintf(`
 		{
-			"link" : {
-				"root"   : { "method" : "GET",  "uri" : "/" },
-				"index"  : { "method" : "GET",  "uri" : "/v1" }
-			},
 			"content" : %v
 		}`,
 		string(content),
@@ -130,18 +86,6 @@ func (self *Server) Read(writer http.ResponseWriter, request *http.Request, para
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Write(response)
 }
-
-// func (self *Server) Update(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
-// 	writer.Header().Set("Content-Type", "application/json")
-// 	http.Error(
-// 		writer, "API Under construction", http.StatusNotImplemented)
-// }
-
-// func (self *Server) Delete(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
-// 	writer.Header().Set("Content-Type", "application/json")
-// 	http.Error(
-// 		writer, "API Under construction", http.StatusNotImplemented)
-// }
 
 // API function : GET "/v1/jirou/:id/report"
 func (self *Server) SearchReport(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
@@ -163,10 +107,6 @@ func (self *Server) SearchReport(writer http.ResponseWriter, request *http.Reque
 	content := strings.Join(values, ",")
 	response := []byte(fmt.Sprintf(`
 		{
-			"link" : {
-				"root"   : { "method" : "GET",  "uri" : "/" },
-				"index"  : { "method" : "GET",  "uri" : "/v1" }
-			},
 			"content" : [
 				%v
 			]
@@ -263,10 +203,6 @@ func (self *Server) PostReport(writer http.ResponseWriter, request *http.Request
 
 	response := []byte(fmt.Sprintf(`
 		{
-			"link" : {
-				"root"   : { "method" : "GET",  "uri" : "/" },
-				"index"  : { "method" : "GET",  "uri" : "/v1" }
-			}, 
 			"content" : %s
 		}
 		`,
@@ -278,17 +214,13 @@ func (self *Server) PostReport(writer http.ResponseWriter, request *http.Request
 
 // Run up The server
 func (self *Server) Run(serverOption *Option) {
+
 	// Build Routing
 	router := httprouter.New()
-	router.GET("/", self.Root)
-	router.GET("/v1", self.V1Root)
 	router.GET("/v1/jirou", self.Search)
 	router.GET("/v1/jirou/:id", self.Read)
 	router.GET("/v1/jirou/:id/report", self.SearchReport)
 	router.POST("/v1/jirou/:id/report", self.PostReport)
-	// router.POST("/v1/jirou", self.Create)
-	// router.PUT("/v1/jirou/:id", self.Update)
-	// router.DELETE("/v1/jirou/:id", self.Delete)
 
 	// Open db
 	dbOption := opt.Options{
