@@ -1,3 +1,3 @@
 #!/bin/sh
 
-go run jirou.go
+gom run jirou.go
