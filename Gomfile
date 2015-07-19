@@ -1,0 +1,4 @@
+gom 'github.com/golang/snappy'
+gom 'github.com/julienschmidt/httprouter'
+gom 'github.com/pborman/uuid'
+gom 'github.com/syndtr/goleveldb/leveldb'
